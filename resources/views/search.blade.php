@@ -40,7 +40,7 @@
                                 <div class="row justify-content-center">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <input class="form-control" type='text' name="search" placeholder="Type to search...">
+                                            <input class="form-control" type='text' name="search" value="" placeholder="Type to search...">
                                         </div>
                                     </div>
                                     <div class="col-md-1">
@@ -52,6 +52,42 @@
                             </form>
                         </div>
 
+                        
+
+                        <div class="table-responsive p-5">
+                            <table class="table table-striped table-bordered table-condensed">
+                                <thead>
+                                    <tr>
+                                        <th>UUID</th>
+                                        <th>Name</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach($items as $item)
+                                        <tr>
+                                            <td>{{ $item->uuid }}</td>
+                                            <td>{{ $item->name }}</td>
+                                        </tr> 
+                                    @endforeach
+                                </tbody>
+                            </table>
+
+                            <div class="pag">
+                                <div class="col-md-3">
+                                    <p>Showing {{($items->currentPage()-1)*$items->perPage()+1}} to 
+                                        {{(($items->currentPage()-1)*$items->perPage()+1) + ($items->count()-1)}} out of  {{$items->total()}}</p>
+                                </div>
+                                <div class="col-md-9">
+                                    <nav>
+                                        <ul class="pagination flex-wrap pagination-sm">
+                                        {!! $items->appends($_GET)->links() !!}
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        
                     </div>
                 </div>
             </div>
